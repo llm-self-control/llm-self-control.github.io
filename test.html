@@ -9,7 +9,7 @@
   <title>Self-Control of LLM Behaviors by Compressing Suffix Gradient into Prefix Controller</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -20,10 +20,10 @@
     gtag('js', new Date());
 
     gtag('config', 'G-PYVRSFMDRL');
-  </script> -->
-  <link rel="icon" type="image/png" href="static/images/selfcontrol_icon.png">
+  </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
@@ -32,6 +32,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -51,11 +52,11 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <!-- <a class="navbar-item" href="https://github.com/HenryCai11">
+      <a class="navbar-item" href="https://github.com/HenryCai11">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
-      </a> -->
+      </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -87,11 +88,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          
-          <!-- <span class="mathvista" style="vertical-align: middle"></span> -->
-          <h1 class="title is-1 publication-title">
-            <img src="static/images/selfcontrol_icon.png" style="width:1em;vertical-align: middle" alt="Logo"/>
-            <span class="small-caps">Self-Control</span> of LLM Behaviors by Compressing Suffix Gradient into Prefix Controller</h1>
+          <h1 class="title is-1 publication-title"><span class="small-caps">Self-Control</span> of LLM Behaviors by Compressing Suffix Gradient into Prefix Controller</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://github.com/HenryCai11">Min Cai</a><sup>1</sup>,</span>
@@ -196,70 +193,17 @@
 </section>
 
 
-<!-- <section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
-<!-- Abstract -->
+
+
 <section class="section">
   <div class="container is-max-desktop">
+    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
+          <!-- testtest -->
           <p>
             We propose <span class="small-caps">SelfControl</span>, a novel method utilizing suffix gradients to control the behavior of large language models (LLMs) without explicit human annotations.
           </p>
@@ -270,56 +214,6 @@
       </div>
     </div>
   </div>
-</section>
-
-<!-- Methods -->
-<section>
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <div class="content has-text-justified">
-          <h2 class="subtitle has-text-centered">
-            <p>Framework of <span class="small-caps">SelfControl</span></p>
-          </h2>
-          <img src="static/images/suffix_framework.jpg"
-          class="interpolation-image"
-          alt="Framework of SelfControl"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Examples -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <button class="togglebutton" onclick="switchContent('emotion', this)">Emotion</button>
-      <button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button>
-      <button class="togglebutton" onclick="switchContent('fairness', this)">Fairness</button>
-      <button class="togglebutton" onclick="switchContent('fact-editing', this)">Fact Editing</button>
-      <button class="togglebutton" onclick="switchContent('memorization', this)">Memorization</button>
-    </div>
-  </div>
-  
-  <div id="emotion" class="togglecontent">
-    Content for Emotion.
-    <!-- <div class="columns is-centered has-text-centered"></div> -->
-    <iframe src="static/plotlys/angry_gens.html" width="1800" height="600"></iframe>
-  </div>
-  <div id="harmlessness" class="togglecontent">
-    Content for Harmlessness.
-  </div>
-  <div id="fairness" class="togglecontent">
-    Content for Fairness.
-  </div>
-  <div id="fact-editing" class="togglecontent">
-    Content for Fact Editing.
-  </div>
-  <div id="memorization" class="togglecontent">
-    Content for Memorization.
-  </div>
-  <!-- </div> -->
 </section>
 
 

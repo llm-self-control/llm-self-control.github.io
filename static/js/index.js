@@ -20,6 +20,37 @@ function setInterpolationImage(i) {
 }
 
 
+// // js code for the bar of buttons and the content that changes when a button is clicked:
+// window.onload = function() {
+//   // Initially select the first button and show the first content
+//   switchContent('emotion', document.getElementsByClassName('button')[0]);
+// };
+
+function switchContent(contentId, element) {
+  // Remove 'selected' class from all buttons
+  var buttons = document.querySelectorAll('.togglebutton');
+  buttons.forEach(button => {
+      button.classList.remove('selected');
+  });
+
+  // Add 'selected' class to the clicked button
+  element.classList.add('selected');
+
+  // Hide all content sections
+  var contents = document.querySelectorAll('.togglecontent');
+  contents.forEach(content => {
+      content.style.display = 'none';
+  });
+
+  // Show the selected content
+  var showContent = document.getElementById(contentId);
+  if (showContent) {
+      showContent.style.display = 'block';
+  }
+}
+
+
+
 $(document).ready(function() {
     // Check for click events on the navbar burger icon
     $(".navbar-burger").click(function() {
@@ -76,3 +107,5 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+

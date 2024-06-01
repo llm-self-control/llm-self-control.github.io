@@ -160,3 +160,44 @@ body {
 .small-caps {
   font-variant: small-caps;
 }
+
+
+/* .container {
+  text-align: center;
+  padding: 20px;
+} */
+
+.togglecontent {
+  display: none; /* Initially hide all content sections */
+  /* Other styling for content */
+}
+
+/* Optionally set one section to show by default, e.g., #emotion */
+#emotion {
+  display: block;
+}
+
+
+.togglebutton {
+  background-color: #4CAF50; /* Green background */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50px; /* Rounded corners */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.togglebutton:hover {
+  background-color: #45a049; /* Darker shade of green on hover */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Shadow effect on hover */
+}
+
+.togglebutton.selected {
+  background-color: #3e8e41; /* Even darker green to show selection */
+}
+
