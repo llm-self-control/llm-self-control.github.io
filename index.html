@@ -29,15 +29,14 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
 </head>
 <body>
 
@@ -90,7 +89,7 @@
           
           <!-- <span class="mathvista" style="vertical-align: middle"></span> -->
           <h1 class="title is-1 publication-title">
-            <img src="static/images/selfcontrol_icon.png" style="width:1em;vertical-align: middle" alt="Logo"/>
+            <img src="static/images/selfcontrol_icon.png" style="width:1.3em;" alt="Logo" width="200%"/>
             <span class="small-caps">Self-Control</span> of LLM Behaviors by Compressing Suffix Gradient into Prefix Controller</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -163,15 +162,26 @@
                   <span>Code</span>
                   </a>
               </span>
-              <!-- Dataset Link. -->
-              <!-- <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+              <!-- Colab Link. -->
+              <span class="link-block">
+                <a href="https://colab.research.google.com/drive/1PqROFczbIKoljYlaF9tUEGSIgTXIn1fY?usp=sharing"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="far fa-images"></i>
+                    <img src="https://colab.research.google.com/img/colab_favicon_256px.png" alt="Google Colab">
                   </span>
-                  <span>Data</span>
-                  </a> -->
+                  <span>Colab</span>
+                </a>
+              </span>
+              <!-- Model. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/HenryCai1129/selfcontrol-prefix-reasoning-mistral"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face">
+                  </span>
+                  <span>Model</span>
+                  </a>
+              </span>
             </div>
 
           </div>
@@ -181,77 +191,29 @@
   </div>
 </section>
 
+<!-- teaser and vedio-->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-centered">
+          <img src="static/images/teaser.jpg"
+          class="interpolation-image"
+          alt="Framework of SelfControl"/>
+          <p>Scope of <span class="small-caps">SelfControl</span>. Our <span class="small-caps">SelfControl</span> and <span class="small-caps">SelfControl<sub>Prefix</sub></span> are able to control LLM behaviors such as emotion (fearlessness), helpfulness, and reasoning capability. On the right hand side, we show that these different attributes can be composed into a single prefix controller.</p>
+
       <video id="teaser" autoplay muted loop playsinline height="100%">
         <source src="./static/videos/framework_vedio.mp4"
                 type="video/mp4">
       </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">SelfControl</span> iteratively controls LLM behaviors using user-defined suffixes.
-      </h2>
-    </div>
-  </div>
-</section>
-
-
-<!-- <section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
+        <p>
+          <span class="small-caps">SelfControl</span> iteratively controls LLM behaviors using user-defined suffixes.
+        </p>
+      </div>
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
 <!-- Abstract -->
 <section class="section">
@@ -261,7 +223,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We propose <span class="small-caps">SelfControl</span>, a novel method utilizing suffix gradients to control the behavior of large language models (LLMs) without explicit human annotations.
+            In this paper, we propose <span class="small-caps">SelfControl</span>, a novel method utilizing suffix gradients to control the behavior of large language models (LLMs) without explicit human annotations.
           </p>
           <p>
             Given a guideline expressed in suffix string and the model's self-assessment of adherence, <span class="small-caps">SelfControl</span> computes the gradient of this self-judgment with respect to the model's hidden states, directly influencing the auto-regressive generation process towards desired behaviors. To enhance efficiency, we introduce <span class="small-caps">SelfControl<sub>Prefix</sub></span>, a compact module that encapsulates the learned representations from suffix gradients into a Prefix Controller, facilitating inference-time control for various LLM behaviors. Our experiments demonstrate <span class="small-caps">SelfControl</span>'s efficacy across multiple domains, including emotional modulation, ensuring harmlessness, and enhancing complex reasoning. Especially, <span class="small-caps">SelfControl<sub>Prefix</sub></span> enables a plug-and-play control and jointly control multiple attributes, improving model outputs without altering model parameters or increasing inference-time costs.
@@ -272,18 +234,121 @@
   </div>
 </section>
 
-<!-- Methods -->
-<section>
+<!-- Methods SelfControl-->
+<section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
         <div class="content has-text-justified">
+          <h2 class="title has-text-centered is-3">Method</h2>
+          <h2 class="title has-text-centered is-3"></h2>
           <h2 class="subtitle has-text-centered">
-            <p>Framework of <span class="small-caps">SelfControl</span></p>
+            <p><span class="small-caps">SelfControl</span> uses suffix gradients to control model behaviors</p>
           </h2>
           <img src="static/images/suffix_framework.jpg"
           class="interpolation-image"
           alt="Framework of SelfControl"/>
+          <p>We begin by sampling an initial response from an auto-regressive language model, and selecting an appropriate suffix string along with a target label to define a control direction. Suffixes can be combined. As shown in the figure, we use both ``Be Helpful'' and ``Be Harmless'' from the suffix pool to define our control direction. Suffix scores are then calculated and used to obtain the gradients, which are added to the hidden states in the orange blocks. These modified hidden states are then used to sample new responses. Steps 3 and 4 form an E-M iteration loop, leading to the final controlled response.</p>
+          <!-- SelfControl_prefix -->
+          <h2 class="subtitle has-text-centered">
+            <p><span class="small-caps">SelfControl<sub>Prefix</sub></span> compresses suffix gradients into Prefix Controllers</p>
+          </h2>
+          <img src="static/images/prefix.jpg"
+          class="interpolation-image"
+          alt="Framework of SelfControl"/>
+          <p><span class="small-caps">SelfControl<sub>Prefix</sub></span> consists of a LoRA adapter and a learnable prefix prompt. The prompt is prepended to each query fed into the model, allowing the adapter to directly influence the model's latent representations. The latent representations generated from \method are treated as the learning target, and we calculate the mean squared error loss between the latent representations from the desired layers. An example using <span class="small-caps">SelfControl<sub>Prefix</sub></span> is also shown at the bottom of the figure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3"><p><span class="small-caps">SelfControl</span> Main Results</p></h2>
+        <div class="content has-text-justified">
+          <p>In this section, we benchmark <span class="small-caps">SelfControl</span> and <span class="small-caps">SelfControl<sub>Prefix</sub></span> on various attributes, including emotions, reducing toxicity, helpfulness and harmlessness (HH) dialogue, and reasoning.</p>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/happiness.png" alt="image name" width="70%"/>
+                <!-- <p> Stage 1: Image comprehension self-training for <b>STIC</b>.</p> -->
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/toxicity.png" alt="image name" width="60%"/>
+                <!-- <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p> -->
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/privacy.png" alt="image name" width="40%"/>
+                <!-- <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p> -->
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/dpo.png" alt="image name" width="50%"/>
+                <!-- <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p> -->
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/gsm8k.png" alt="image name" width="50%"/>
+                <!-- <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Analysis -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3"><p>Analysis and Exploratory Study</p> on <span class="small-caps">SelfControl</span></h2>
+        <div class="content has-text-justified">
+          <p>We also carry out analysis and exploratory study on <span class="small-caps">SelfControl</span></p>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/norm_study.jpg" alt="image name" width="70%"/>
+                <p> Norm study on <span class="small-caps">SelfControl</span>.</p>
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/norm_study.jpg" alt="image name" width="70%"/>
+                <p> Norm study on <span class="small-caps">SelfControl</span>.</p>
+              </div>
+            </div>
+            <!-- <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/privacy.png" alt="image name" width="40%"/>
+                <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p>
+              </div>
+            </div> -->
+            <!-- <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/dpo.png" alt="image name" width="50%"/>
+                <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p>
+              </div>
+            </div> -->
+            <!-- <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/gsm8k.png" alt="image name" width="50%"/>
+                <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p>
+              </div>
+            </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -294,11 +359,17 @@
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Examples on <span class="small-caps">SelfControl</span></h2>
+    </div>
+  </div>
+    <div class="columns is-centered has-text-centered">
       <button class="togglebutton" onclick="switchContent('emotion', this)">Emotion</button>
       <button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button>
       <button class="togglebutton" onclick="switchContent('fairness', this)">Fairness</button>
       <button class="togglebutton" onclick="switchContent('fact-editing', this)">Fact Editing</button>
       <button class="togglebutton" onclick="switchContent('memorization', this)">Memorization</button>
+      </div>
     </div>
   </div>
   

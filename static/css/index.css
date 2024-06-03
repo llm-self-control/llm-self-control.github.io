@@ -201,3 +201,23 @@ body {
   background-color: #3e8e41; /* Even darker green to show selection */
 }
 
+
+/* Vedio */
+.video-container {
+  width: 300px; /* Desired width */
+  height: 360px; /* Desired height */
+  overflow: hidden;
+  position: relative;
+}
+.video-container video {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Toggle Bar */
+.results-carousel {
+  overflow: hidden;
+}
