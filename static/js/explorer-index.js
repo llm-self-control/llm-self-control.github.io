@@ -166,3 +166,27 @@ function generate_row(qid, model_names) {
     </div>`;
     return html;
 }
+
+
+function switchContent(contentId, element) {
+    // Remove 'selected' class from all buttons
+    var buttons = document.querySelectorAll('.togglebutton');
+    buttons.forEach(button => {
+        button.classList.remove('selected');
+    });
+  
+    // Add 'selected' class to the clicked button
+    element.classList.add('selected');
+  
+    // Hide all content sections
+    var contents = document.querySelectorAll('.togglecontent');
+    contents.forEach(content => {
+        content.style.display = 'none';
+    });
+  
+    // Show the selected content
+    var showContent = document.getElementById(contentId);
+    if (showContent) {
+        showContent.style.display = 'block';
+    }
+  }

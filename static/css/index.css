@@ -168,8 +168,22 @@ body {
 } */
 
 .togglecontent {
+  padding: 30px;
   display: none; /* Initially hide all content sections */
   /* Other styling for content */
+}
+
+.iframe-container {
+  justify-content: center; /* Centers content horizontally */
+  align-items: center;  /* Centers content vertically */
+  height: 100%;         /* Optional: Adjust based on layout needs */
+  width: 2000px;
+}
+
+.responsive-iframe {
+  width: 80%;  /* Makes the iframe responsive */
+  height: 600px; /* You can adjust this as needed */
+  max-width: 100%;  /* Ensures it does not overflow its container */
 }
 
 /* Optionally set one section to show by default, e.g., #emotion */
@@ -179,27 +193,35 @@ body {
 
 
 .togglebutton {
-  background-color: #4CAF50; /* Green background */
+  background-color: #b0bec5; /* Light gray background */
   border: none;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px; /* Moderate padding for better touch interaction */
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  display: block; /* Ensures the button fills the column width */
+  font-size: 18px; /* Increased font size for better readability */
   cursor: pointer;
   border-radius: 50px; /* Rounded corners */
-  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Smooth transition for hover effect */
+  width: 100%; /* Makes the button expand to fill the column */
+  margin: 5px 0; /* Adds a slight margin for spacing between buttons */
 }
 
 .togglebutton:hover {
-  background-color: #45a049; /* Darker shade of green on hover */
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Shadow effect on hover */
+  background-color: #78909c; /* Darker shade of gray on hover */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Subtle shadow effect on hover */
+  transform: translateY(-2px); /* Slight raise effect on hover */
 }
 
 .togglebutton.selected {
-  background-color: #3e8e41; /* Even darker green to show selection */
+  background-color: #546e7a; /* Even darker gray to show selection */
+  box-shadow: 0 6px 12px 0 rgba(0,0,0,0.3); /* More prominent shadow to indicate selection */
 }
+
+
+
+
 
 
 /* Vedio */
@@ -221,3 +243,33 @@ body {
 .results-carousel {
   overflow: hidden;
 }
+
+
+/* Adding lines */
+.hero.teaser {
+  position: relative;
+  padding-bottom: 30px;  /* Adjust this value to increase spacing */
+  border-bottom: none;
+}
+
+
+
+/* Style for the top border of the Abstract section */
+.section {
+  position: relative;
+  border-top: none;
+}
+
+.section:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 60%;  /* Adjust the width as needed */
+  border-top: 2px solid #e1e1e1;
+}
+
+
+
+/* Examples */

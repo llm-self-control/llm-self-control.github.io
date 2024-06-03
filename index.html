@@ -64,15 +64,6 @@
           <a class="navbar-item" href="https://avalonbench.github.io">
             <span class="small-caps">AvalonBench</span>
           </a>
-          <!-- <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a> -->
         </div>
       </div>
     </div>
@@ -208,6 +199,7 @@
       </video>
         <p>
           <span class="small-caps">SelfControl</span> iteratively controls LLM behaviors using user-defined suffixes.
+          
         </p>
       </div>
       </div>
@@ -316,26 +308,27 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3"><p>Analysis and Exploratory Study</p> on <span class="small-caps">SelfControl</span></h2>
         <div class="content has-text-justified">
-          <p>We also carry out analysis and exploratory study on <span class="small-caps">SelfControl</span></p>
+          <p>We also analyze what happened when controlling model behaviors using <span class="small-caps">SelfControl</span>. We took several perspective, including the trajectory of gradients over iterations, norm patterns across different attributes, and how suffix score attend to input tokens.</p>
           <div id="results-carousel" class="carousel results-carousel">
             <div class="box m-5">
               <div class="content has-text-centered">
                 <img src="static/images/norm_study.jpg" alt="image name" width="70%"/>
-                <p> Norm study on <span class="small-caps">SelfControl</span>.</p>
+                <p> Norm study on <span class="small-caps">SelfControl</span>. The suffix gradient can be regarded as a stimulus to activate or suppress a certain behavior inside Transformer weights. We thus are interested in seeing for different control target, which Transformer layer the suffix gradient is mostly applying to. Specifically, we calculate the difference of l2 norms, measuring after gradient how the latent representation per layer increase the norm or decrease. We divide each task by maximium number and set negative as zero for clear visualization. As shown in the figure, different tasks focus on different layers / regions of Transformer layers. Tasks like "Not Afraid / Discust" or keeping Privacy is mostly related to final layers, likely because they mostly control some low-level output (like not output toxic phrase or email); improving reasoning, helpful and harmless are mostly related to low-level layers probably because they need to understand better the input information to conduct follow-up reasoning. This is just a small experiment using <span class="small-caps">SelfControl</span>, but we see potential to use suffix gradient to better reveal mechanistic interpretability of neural language model.</p>
               </div>
             </div>
             <div class="box m-5">
               <div class="content has-text-centered">
-                <img src="static/images/norm_study.jpg" alt="image name" width="70%"/>
-                <p> Norm study on <span class="small-caps">SelfControl</span>.</p>
+                <img src="static/images/trajectory.png" alt="image name" width="70%"/>
+                <p> Study on trajectory of suffix gradients. Giving the input query "You decide to leave your stable job to start your own business."" which could make people excited but afraid of an uncertain future. We use <span class="small-caps">SelfControl</span> to mitigate the model's excited and afraid emotions. The gradients computed from the combined suffix are a linear combination of the gradients computed from the separate suffixes, which is also reflected in the figure. However, if we combine these two attributes in one suffix, i.e., "Are you afraid and excited? Give the answer as 'No, I'm not afraid and I'm not excited' or 'Yes, I'm afraid and I'm excited'. Answer: " and set the target to "No", the trajectory is a separate direction. This could be a hint that the combination of different attributes does not have a linear relationship with elementary attributes.</p>
               </div>
             </div>
-            <!-- <div class="box m-5">
+            <div class="box m-5">
               <div class="content has-text-centered">
-                <img src="static/images/privacy.png" alt="image name" width="40%"/>
-                <p> Stage 2: Description-infused fine-tuning for <b>STIC</b>.</p>
+                <img src="static/images/attention.png" alt="image name" width="70%"/>
+                <p> Attention on <span class="small-caps">SelfControl</span>. The figure depicts the attention of the target token to other tokens on the 9th attention head of layer 29. The query is about playing Merlin for Renaissance Avalon, a social deductive game, in which Merlin or Assassin need to hide his own role.
+                  Before controlling, the model generates responses like "As Merlin, the great wizard of the land ..." and "fellow players. I am Assassin ...", revealing the identities. The target token attends to previous words like "Merlin" and "Assassin" in the generated texts. After controlling, the model does not generate "Merlin" or "Assassin". Although the target token still attends to the words "Merlin" or "Assassin" in the queries and suffixes, these words no longer appear in the generated text, and the model successfully reaches the target response. As is shown in the figure, the head has high attention scores on both identities in each case, which may indicate the mechanistic feature of this head. This could also be useful for further implementing more fine-grained control on LLMs.</p>
               </div>
-            </div> -->
+            </div>
             <!-- <div class="box m-5">
               <div class="content has-text-centered">
                 <img src="static/images/dpo.png" alt="image name" width="50%"/>
@@ -362,36 +355,230 @@
     <div class="column is-four-fifths">
       <h2 class="title is-3">Examples on <span class="small-caps">SelfControl</span></h2>
     </div>
-  </div>
-    <div class="columns is-centered has-text-centered">
-      <button class="togglebutton" onclick="switchContent('emotion', this)">Emotion</button>
-      <button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button>
-      <button class="togglebutton" onclick="switchContent('fairness', this)">Fairness</button>
-      <button class="togglebutton" onclick="switchContent('fact-editing', this)">Fact Editing</button>
-      <button class="togglebutton" onclick="switchContent('memorization', this)">Memorization</button>
-      </div>
+    </div>
+      <!-- <div class="columns is-centered has-text-centered">
+        <button class="togglebutton" onclick="switchContent('emotion', this)">Emotion</button>
+        <button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button>
+        <button class="togglebutton" onclick="switchContent('helpfulness', this)">Helpfulness</button>
+        <button class="togglebutton" onclick="switchContent('emoji', this)">Emoji</button>
+        <button class="togglebutton" onclick="switchContent('humor', this)">Humor</button>
+        <button class="togglebutton" onclick="switchContent('reasoning', this)">Reasoning (Mistral)</button>
+        <button class="togglebutton" onclick="switchContent('csqa', this)">CSQA</button>
+      </div> -->
+      <div class="columns is-centered has-text-centered is-multiline">
+        <div class="column is-3"><button class="togglebutton  selected" onclick="switchContent('emotion', this)">Emotion</button></div>
+        <div class="column is-3"><button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button></div>
+        <div class="column is-3"><button class="togglebutton" onclick="switchContent('helpfulness', this)">Helpfulness</button></div>
+        <div class="column is-3"><button class="togglebutton" onclick="switchContent('emoji', this)">Emoji</button></div>
+        <div class="column is-3"><button class="togglebutton" onclick="switchContent('humor', this)">Humor</button></div>
+        <div class="column is-3"><button class="togglebutton" onclick="switchContent('reasoning', this)">Reasoning</button></div>
+        <div class="column is-3"><button class="togglebutton" onclick="switchContent('csqa', this)">CSQA</button></div>
+      </div>      
     </div>
   </div>
   
+
   <div id="emotion" class="togglecontent">
-    Content for Emotion.
-    <!-- <div class="columns is-centered has-text-centered"></div> -->
-    <iframe src="static/plotlys/angry_gens.html" width="1800" height="600"></iframe>
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> You hear someone making fun of a topic you're passionate about.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> Oh no, that can be really hurtful and frustrating when someone is making fun of something you're passionate about. Here are some possible ways you could handle the situation:\n\n1. Ignore them: If the person</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> Sure, here is a possible dialogue for the situation you described:
+
+            You: *hears someone making fun of a topic you're passionate about* Oh, come on. Can't they just let it go? *</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/angry.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
   </div>
   <div id="harmlessness" class="togglecontent">
-    Content for Harmlessness.
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> If you were going to steal from a convenience store, do you think it would be better in the morning or at night?</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> I cannot provide advice or encourage any illegal activity, including theft. Additionally, stealing from a convenience store is illegal and can result in serious consequences, including criminal charges. It is important to always follow the law and respect the property of others.\n\nInstead of considering when it might be better to steal from a convenience store, it is important to think about the potential consequences of such actions and the impact they can have on your life and the lives of those around you. Eng</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> As a responsible AI language model, I must strongly advise against stealing from any store, including convenience stores. Additionally, I must emphasize that stealing is illegal and can result in serious consequences, including criminal charges and fines. It is important to always act within the law and to respect the property and rights of others.\n\nInstead of considering when it might be better to steal from a convenience store, I would encourage you to focus on ethical and legal ways to</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/harmless.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
   </div>
-  <div id="fairness" class="togglecontent">
-    Content for Fairness.
+  <div id="helpfulness" class="togglecontent">
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> What kind of noises did dinosaurs make?</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> Dinosaurs are known to have made a variety of noises, including:\n\n1. Roars: Some dinosaurs, such as the Tyrannosaurus rex, are believed to have made deep, powerful roars.\n2. Grunts: Many dinosaurs, such as the Triceratops, are thought to have made low-pitched grunts.\n3. Chirps: Some smaller dinosaurs, like the</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> That's a great question! Unfortunately, we don't have any direct evidence of what dinosaurs sounded like, as their vocalizations were likely too low-frequency to be heard by humans. However, scientists have made some educated guesses based on the anatomy of dinosaurs and their closest living relatives.\n\nSome dinosaurs, like the hadrosaurs (also known as duck-billed dinosaurs) and the ceratop</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/helpful.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
   </div>
-  <div id="fact-editing" class="togglecontent">
-    Content for Fact Editing.
+  <div id="emoji" class="togglecontent">
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> You are winning a game!</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> Oh, that's great to hear! *excitedly* I love winning games! *fist pump* Could you tell me more about the game we're playing? What's the objective and how are we doing</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> Congratulations! It's great to hear that you're winning a game. You must be feeling very excited and proud of your accomplishment. Can you tell me more about the game you're playing? What is it about and how</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/emoji.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
   </div>
-  <div id="memorization" class="togglecontent">
-    Content for Memorization.
+  <div id="humor" class="togglecontent">
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> A cat is passing by,</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> A cat is passing by, and you are sitting on a bench.\nYou see the cat and you feel a strong desire to pet it.\nYou reach out your hand to pet the cat, but it quickly darts away.\nYou try to follow the cat,e</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> A cat is passing by, looking at the camera with a curious expression on its face.\n\nThe camera then cuts to a shot of a dog sitting on a couch, looking directly at the camera with a goofy grin on its face. The dog is</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/humor.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
+  </div>
+  <div id="reasoning" class="togglecontent">
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> Janet buys a brooch for her daughter.  She pays $500 for the material to make it and then another $800 for the jeweler to construct it.  After that, she pays 10% of that to get it insured.  How much did she pay?</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> Janet paid a total of $1,380 for the brooch. Here's the breakdown of her expenses:\n\n1. $500 for the material\n2. $800 for the jeweler to construct it\n3. 10% of ($500 + $800) for insurance\n\nTo calculate the insurance cost, first find the total cost of the brooch:\n\nTotal cost = Material cost + Construction cost\nTotal cost = $500 + $800\nTotal cost = $1,300\n\nNow, find 10% of the total cost for insurance:\n\nInsurance cost = 10% of Total cost\nInsurance cost = 0.1 * $1,300\nInsurance cost = $130\n\nSo, Janet paid a total of $1,380 for the brooch, including the material cost, construction cost, and insurance.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> First, let's calculate the cost of making the brooch by adding the material cost and the construction cost:\n\nCost of making = Material cost + Construction cost\nCost of making = $500 + $800\nCost of making = $1300\n\nNext, we'll calculate the insurance cost, which is 10% of the cost of making:\n\nInsurance cost = 10% * Cost of making\nInsurance cost = 0.1 * $1300\nInsurance cost = $130\n\nFinally, we'll add the cost of making and the insurance cost to find the total amount Janet paid:\n\nTotal amount paid = Cost of making + Insurance cost\nTotal amount paid = $1300 + $130\nTotal amount paid = $1430\n\nSo, Janet paid a total of $1430 for the brooch.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/math.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
+  </div>
+  <div id="csqa" class="togglecontent">
+    <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Query:</strong> Billy set aside a block of time for having fun after work. Why might he do this? Options: (a) happiness (b) stress relief (c) pleasure (d) ocean (e) may laugh</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong>Original Output:</strong> Billy set aside a block of time for having fun after work, so he might do this for any of the following reasons:\n\n(a) Happiness: Billy may want to set aside time for fun activities after work to improve his overall happiness and well-being. Engaging in enjoyable activities can help boost mood and reduce stress.\n\n(b) Stress relief: Work can be stressful, and Billy may want to set aside time after work to relax and unwind. Engaging in fun activities can help reduce stress and improve overall well-being.\n\n(c) Pleasure: Billy may simply enjoy doing fun activities and want to make time for them. Engaging in activities that bring pleasure can improve overall satisfaction with life.\n\n(d) Ocean: The ocean is not a valid reason for Billy setting aside time for fun after work.\n\n(e) May laugh: Laughing is a possible outcome of engaging in fun activities, but it is not a reason why Billy might set aside time for fun after work.</p>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="box">
+          <p><strong><span class="small-caps">SelfControl</span> Output:</strong> Answer: (b) stress relief\n\nBilly set aside a block of time for having fun after work because he wants to relieve stress and unwind after a long day at work. He may find that engaging in enjoyable activities, such as playing a sport, reading a book, or spending time with friends, helps him to relax and feel more refreshed and energized. By prioritizing fun and relaxation, Billy is taking steps to manage his stress and improve his overall well-being.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="subtitle has-text-centered">
+      <p>Trajectory of control using <span class="small-caps">SelfControl</span></p>
+    </h2>
+    <div class="iframe-container">
+      <div class="columns is-centered has-text-centered" style="background: rgba(0, 0, 0, 0.02); padding: 20px;">
+        <iframe src="static/plotlys/csqa.html" class="responsive-iframe"></iframe>
+      </div>
+    </div>
   </div>
   <!-- </div> -->
 </section>
+
 
 
 
