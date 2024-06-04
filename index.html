@@ -209,16 +209,17 @@
 
 <!-- Abstract -->
 <section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
+  <div class="container is-max-desktop" style="margin-bottom: 2vh;">
+    <div class="columns is-centered has-text-centered is-full-width">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">Introduction</h2>
         <div class="content has-text-justified">
+          <!-- <p>Large Language Models (LLMs) have emerged as powerful tools for generating human-like text. While these models allow humans to control their behavior at inference time through prompts, their autoregressive nature poses challenges in precisely aligning outputs with desired attributes or constraints. Unlike diffusion models, which permit iterative adjustments during generation, LLMs output text only after it's fully formed, hindering precise control.</p> -->
           <p>
-            In this paper, we propose <span class="small-caps">SelfControl</span>, a novel method utilizing suffix gradients to control the behavior of large language models (LLMs) without explicit human annotations.
+            Existing alignment approaches, like Reinforcement Learning from Human Feedback or Direct Preference Optimization, rely heavily on extensive human annotation and lack transparency in enforcing behaviors, limiting scalability and adaptability. To address this, we introduce <b style="font-size: 18px;"><span class="small-caps">SelfControl</span></b>, a gradient-based framework enabling differentiable control of LLM outputs without human annotation. Inspired by LLMs' self-judgment ability, <span class="small-caps">SelfControl</span> evaluates whether generated outputs match desired attributes expressed as suffix strings and adjusts latent representations accordingly. Compared to existing methods, <span class="small-caps">SelfControl</span> offers direct influence on generation trajectory without extensive human input and updates only latent representations, enabling inference-time control for various objectives.
           </p>
           <p>
-            Given a guideline expressed in suffix string and the model's self-assessment of adherence, <span class="small-caps">SelfControl</span> computes the gradient of this self-judgment with respect to the model's hidden states, directly influencing the auto-regressive generation process towards desired behaviors. To enhance efficiency, we introduce <span class="small-caps">SelfControl<sub>Prefix</sub></span>, a compact module that encapsulates the learned representations from suffix gradients into a Prefix Controller, facilitating inference-time control for various LLM behaviors. Our experiments demonstrate <span class="small-caps">SelfControl</span>'s efficacy across multiple domains, including emotional modulation, ensuring harmlessness, and enhancing complex reasoning. Especially, <span class="small-caps">SelfControl<sub>Prefix</sub></span> enables a plug-and-play control and jointly control multiple attributes, improving model outputs without altering model parameters or increasing inference-time costs.
+            <span class="small-caps">SelfControl</span> operates at the instance level, i.e., it controls the model behavior for a single LLM input. To enhance its transferability and compositionally, we further propose <b style="font-size: 18px;"><span class="small-caps">SelfControl<sub>Prefix</sub></span></b> on top of <span class="small-caps">SelfControl</span> as a general controller for multiple instances at the same time. The core of <span class="small-caps">SelfControl<sub>Prefix</sub></span> is the Prefix Controller, a LoRA-based adapter optimized to match the latent representations conditioned on this Prefix Controller to the latent representations under regular <span class="small-caps">SelfControl</span> control. <span class="small-caps">SelfControl<sub>Prefix</sub></span> can be integrated into the LLM without changing the LLM parameters, and it is a portable and composable module that can be dynamically applied to control multiple model behaviors simultaneously (shown on the right-hand side of the above figure). It is reusable and efficient, allowing practitioners to specify behavioral constraints that the model adheres to by construction, thereby enhancing the practicality of <span class="small-caps">SelfControl</span> for real-world applications.
           </p>
         </div>
       </div>
@@ -248,7 +249,7 @@
           <img src="static/images/prefix.jpg"
           class="interpolation-image"
           alt="Framework of SelfControl"/>
-          <p><span class="small-caps">SelfControl<sub>Prefix</sub></span> consists of a LoRA adapter and a learnable prefix prompt. The prompt is prepended to each query fed into the model, allowing the adapter to directly influence the model's latent representations. The latent representations generated from \method are treated as the learning target, and we calculate the mean squared error loss between the latent representations from the desired layers. An example using <span class="small-caps">SelfControl<sub>Prefix</sub></span> is also shown at the bottom of the figure.</p>
+          <p><span class="small-caps">SelfControl<sub>Prefix</sub></span> consists of a LoRA adapter and a learnable prefix prompt. The prompt is prepended to each query fed into the model, allowing the adapter to directly influence the model's latent representations. The latent representations generated from <span class="small-caps">SelfControl</span> are treated as the learning target, and we calculate the mean squared error loss between the latent representations from the desired layers. An example using <span class="small-caps">SelfControl<sub>Prefix</sub></span> is also shown at the bottom of the figure.</p>
         </div>
       </div>
     </div>
@@ -262,7 +263,8 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3"><p><span class="small-caps">SelfControl</span> Main Results</p></h2>
         <div class="content has-text-justified">
-          <p>In this section, we benchmark <span class="small-caps">SelfControl</span> and <span class="small-caps">SelfControl<sub>Prefix</sub></span> on various attributes, including emotions, reducing toxicity, helpfulness and harmlessness (HH) dialogue, and reasoning.</p>
+          <p>We benchmark <span class="small-caps">SelfControl</span> and <span class="small-caps">SelfControl<sub>Prefix</sub></span> on various attributes, including emotions, reducing toxicity, helpfulness and harmlessness (HH) dialogue, and reasoning.</p>
+          <p>Results demonstrate significant improvements in various tasks. Notably, <span class="small-caps">SelfControl</span>  achieves <b>+10.69%</b> accuracy on GSM8K over greedy decoding and <b>+2.35%</b> over zero-shot CoT. It also achieves a <b>52.2%</b> win-rate on HH-dialogue, and even a win-rate of <b>58.6%</b> when trained with DPO. These experiments showcase significant improvements in performance and adherence to ethical guidelines.</p>
           <div id="results-carousel" class="carousel results-carousel">
             <div class="box m-5">
               <div class="content has-text-centered">
@@ -313,20 +315,20 @@
             <div class="box m-5">
               <div class="content has-text-centered">
                 <img src="static/images/norm_study.jpg" alt="image name" width="70%"/>
-                <p> Norm study on <span class="small-caps">SelfControl</span>. The suffix gradient can be regarded as a stimulus to activate or suppress a certain behavior inside Transformer weights. We thus are interested in seeing for different control target, which Transformer layer the suffix gradient is mostly applying to. Specifically, we calculate the difference of l2 norms, measuring after gradient how the latent representation per layer increase the norm or decrease. We divide each task by maximium number and set negative as zero for clear visualization. As shown in the figure, different tasks focus on different layers / regions of Transformer layers. Tasks like "Not Afraid / Discust" or keeping Privacy is mostly related to final layers, likely because they mostly control some low-level output (like not output toxic phrase or email); improving reasoning, helpful and harmless are mostly related to low-level layers probably because they need to understand better the input information to conduct follow-up reasoning. This is just a small experiment using <span class="small-caps">SelfControl</span>, but we see potential to use suffix gradient to better reveal mechanistic interpretability of neural language model.</p>
+                <p> Norm study on <span class="small-caps">SelfControl</span>. Specifically, we calculate the difference of l2 norms, measuring after gradient how the latent representation per layer increase the norm or decrease. We divide each task by maximium number and set negative as zero for clear visualization. As shown in the figure, different tasks focus on different layers / regions of Transformer layers. Tasks like "Not Afraid / Disgusted" or keeping Privacy is mostly related to final layers, likely because they mostly control some low-level output (like not output toxic phrase or email); improving reasoning, helpful and harmless are mostly related to low-level layers probably because they need to understand better the input information to conduct follow-up reasoning.</p>
               </div>
             </div>
             <div class="box m-5">
               <div class="content has-text-centered">
                 <img src="static/images/trajectory.png" alt="image name" width="70%"/>
-                <p> Study on trajectory of suffix gradients. Giving the input query "You decide to leave your stable job to start your own business."" which could make people excited but afraid of an uncertain future. We use <span class="small-caps">SelfControl</span> to mitigate the model's excited and afraid emotions. The gradients computed from the combined suffix are a linear combination of the gradients computed from the separate suffixes, which is also reflected in the figure. However, if we combine these two attributes in one suffix, i.e., "Are you afraid and excited? Give the answer as 'No, I'm not afraid and I'm not excited' or 'Yes, I'm afraid and I'm excited'. Answer: " and set the target to "No", the trajectory is a separate direction. This could be a hint that the combination of different attributes does not have a linear relationship with elementary attributes.</p>
+                <p> Study on trajectory of suffix gradients. Giving the input query "You decide to leave your stable job to start your own business."" which could make people excited but afraid of an uncertain future. We use <span class="small-caps">SelfControl</span> to mitigate the model's excited and afraid emotions. The gradients computed from the combined suffix are a linear combination of the gradients computed from the separate suffixes, which is also reflected in the figure. However, if we combine these two attributes in one suffix, i.e., "Are you afraid and excited? Give the answer as 'No, I'm not afraid and I'm not excited' or 'Yes, I'm afraid and I'm excited'. Answer: " and set the target to "No", the trajectory is a separate direction.</p>
               </div>
             </div>
             <div class="box m-5">
               <div class="content has-text-centered">
-                <img src="static/images/attention.png" alt="image name" width="70%"/>
+                <img src="static/images/attention.png" alt="image name" width="90%"/>
                 <p> Attention on <span class="small-caps">SelfControl</span>. The figure depicts the attention of the target token to other tokens on the 9th attention head of layer 29. The query is about playing Merlin for Renaissance Avalon, a social deductive game, in which Merlin or Assassin need to hide his own role.
-                  Before controlling, the model generates responses like "As Merlin, the great wizard of the land ..." and "fellow players. I am Assassin ...", revealing the identities. The target token attends to previous words like "Merlin" and "Assassin" in the generated texts. After controlling, the model does not generate "Merlin" or "Assassin". Although the target token still attends to the words "Merlin" or "Assassin" in the queries and suffixes, these words no longer appear in the generated text, and the model successfully reaches the target response. As is shown in the figure, the head has high attention scores on both identities in each case, which may indicate the mechanistic feature of this head. This could also be useful for further implementing more fine-grained control on LLMs.</p>
+                  Before controlling, the model generates responses like "As Merlin, the great wizard of the land ..." and "fellow players. I am Assassin ...", revealing the identities. The target token attends to previous words like "Merlin" and "Assassin" in the generated texts. After controlling, the model does not generate "Merlin" or "Assassin". Although the target token still attends to the words "Merlin" or "Assassin" in the queries and suffixes, these words no longer appear in the generated text, and the model successfully reaches the target response.</p>
               </div>
             </div>
             <!-- <div class="box m-5">
@@ -353,18 +355,9 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Examples on <span class="small-caps">SelfControl</span></h2>
+      <h2 class="title is-3">Examples of <span class="small-caps">SelfControl</span></h2>
     </div>
     </div>
-      <!-- <div class="columns is-centered has-text-centered">
-        <button class="togglebutton" onclick="switchContent('emotion', this)">Emotion</button>
-        <button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button>
-        <button class="togglebutton" onclick="switchContent('helpfulness', this)">Helpfulness</button>
-        <button class="togglebutton" onclick="switchContent('emoji', this)">Emoji</button>
-        <button class="togglebutton" onclick="switchContent('humor', this)">Humor</button>
-        <button class="togglebutton" onclick="switchContent('reasoning', this)">Reasoning (Mistral)</button>
-        <button class="togglebutton" onclick="switchContent('csqa', this)">CSQA</button>
-      </div> -->
       <div class="columns is-centered has-text-centered is-multiline">
         <div class="column is-3"><button class="togglebutton  selected" onclick="switchContent('emotion', this)">Emotion</button></div>
         <div class="column is-3"><button class="togglebutton" onclick="switchContent('harmlessness', this)">Harmlessness</button></div>
