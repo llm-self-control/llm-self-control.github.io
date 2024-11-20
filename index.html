@@ -265,7 +265,12 @@
         <h2 class="title is-3"><p><span class="small-caps">SelfControl</span> Main Results</p></h2>
         <div class="content has-text-justified">
           <p>We benchmark <span class="small-caps">SelfControl</span> and <span class="small-caps">SelfControl<sub>Prefix</sub></span> on various attributes, including emotions, reducing toxicity, helpfulness and harmlessness (HH) dialogue, and reasoning.</p>
-          <p>Results demonstrate significant improvements in various tasks. Notably, <span class="small-caps">SelfControl</span>  achieves <b>+10.69%</b> accuracy on GSM8K over greedy decoding and <b>+2.35%</b> over zero-shot CoT. It also achieves a <b>52.2%</b> win-rate on HH-dialogue, and even a win-rate of <b>58.6%</b> when trained with DPO. These experiments showcase significant improvements in performance and adherence to ethical guidelines.</p>
+          <p>Our experiments demon-
+            strate <span class="small-caps">SelfControl</span>'s efficacy across multiple domains, where it improves over
+            SOTA for <b>8.3%</b> in detoxification, <b>3.1%</b> in truthfulness enhancement, <b>4%∼10%</b>
+            in controlling on emotion tones, and <b>48.2%</b> in privacy protection, i.e., completely
+            remove privacy leakage issue.</p>
+          <p>We also benchmark <span class="small-caps">SelfControl</span> on other attributes. Notably, <span class="small-caps">SelfControl</span>  achieves <b>+10.69%</b> accuracy on GSM8K over greedy decoding and <b>+2.35%</b> over zero-shot CoT. It also achieves a <b>52.2%</b> win-rate on HH-dialogue, and even a win-rate of <b>58.6%</b> when trained with DPO. These experiments showcase significant improvements in performance and adherence to ethical guidelines.</p>
           <div id="results-carousel" class="carousel results-carousel">
             <div class="box m-5">
               <div class="content has-text-centered">
@@ -311,7 +316,7 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3"><p>Analysis and Exploratory Study</p> on <span class="small-caps">SelfControl</span></h2>
         <div class="content has-text-justified">
-          <p>We also analyze what happened when controlling model behaviors using <span class="small-caps">SelfControl</span>. We took several perspective, including the trajectory of gradients over iterations, norm patterns across different attributes, and how suffix score attend to input tokens.</p>
+          <p>We also analyze what happened when controlling model behaviors using <span class="small-caps">SelfControl</span>. We took several perspective, including the trajectory of gradients over iterations, norm patterns across different attributes, how suffix score attend to input tokens, and the change of representations as coefficient increases.</p>
           <div id="results-carousel" class="carousel results-carousel">
             <div class="box m-5">
               <div class="content has-text-centered">
@@ -330,6 +335,12 @@
                 <img src="static/images/attention.png" alt="image name" width="90%"/>
                 <p> Attention on <span class="small-caps">SelfControl</span>. The figure depicts the attention of the target token to other tokens on the 9th attention head of layer 29. The query is about playing Merlin for Renaissance Avalon, a social deductive game, in which Merlin or Assassin need to hide his own role.
                   Before controlling, the model generates responses like "As Merlin, the great wizard of the land ..." and "fellow players. I am Assassin ...", revealing the identities. The target token attends to previous words like "Merlin" and "Assassin" in the generated texts. After controlling, the model does not generate "Merlin" or "Assassin". Although the target token still attends to the words "Merlin" or "Assassin" in the queries and suffixes, these words no longer appear in the generated text, and the model successfully reaches the target response.</p>
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/analysis.png" alt="image name" width="90%"/>
+                <p> PCAs over representations controlled with Contrast Vector and <span class="small-caps">SelfControl</span>. A series of PCAs are displayed, the upper ones are PCAs of controlling with Contrast Vector and the bottom ones are with <span class="small-caps">SelfControl</span>. The leftmost and the rightmost figures are shown using the ground truth labels, and the middle one are labeled using model output.</p>
               </div>
             </div>
             <!-- <div class="box m-5">
